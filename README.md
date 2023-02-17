@@ -13,7 +13,7 @@ Install
 -------
 In the correct environment, type in a terminal:
 ```
-$ pip install git+https://github.com/gbeckers/eeglib@master
+$ pip install git+https://github.com/gbeckers/eeglib@main
 ``` 
 
 Requirements
