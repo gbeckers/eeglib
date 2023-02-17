@@ -1,19 +1,19 @@
 eeglib
 ======
 
-Eeglib a is library with useful code for EEG work in our lab.
+Eeglib a is library with useful code for EEG work in our lab. It is unlikely 
+to be useful outside our lab.
 
-It keeps code and insights that can be used across projects in one 
+Eeglib keeps code and insights that can be used across projects in one 
 maintainable package. This avoids reinventing the wheel, and allows for 
 incremental improvements to be shared.
 
 
 Install
 -------
-Make sure you have cloned the GitHub EEG repo that includes eeglib to the computer with a functioning conda/MNE install. Make sure you are in the conda environment you use for EEG work (MNE). Go to the top `eeglib` folder in the cloned repo and type:
-
+In the correct environment, type in a terminal:
 ```
-$ pip install -e .
+$ pip install git+https://github.com/gbeckers/eeglib@master
 ``` 
 
 Requirements
@@ -28,12 +28,10 @@ Eeglib depends on the following Python libraries:
 
 However, these are installed automatically if you use the 'pip' method to install eeglib above.
 
-
 Licence
 -------
 This small library is open source and can be used and adapted by anyone. See 
 LICENSE file.
-    
 
 Release Notes
 -------------
