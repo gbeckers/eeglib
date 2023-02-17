@@ -35,6 +35,9 @@ LICENSE file.
 
 Release Notes
 -------------
+*version 0.2.5*
+- separated eeglib from info repo for easier use.
+
 *version 0.2.4*
 - improve function to convert stimulus table to MNE events
 
