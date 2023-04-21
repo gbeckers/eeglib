@@ -288,6 +288,7 @@ def create_recordingeventsinfobiosemi(edfpath, audiostimulustablepath, audiowavp
     eventtable.to_csv(dd.path / 'mne_eventtable.eve', index=False, header=False, sep='\t')
     fig1.savefig(dd.path / 'calibmarks.png', dpi=300)
     fig2.savefig(dd.path / 'snd_epochs.png', dpi=300)
+    fig3.savefig(dd.path / 'snd_epochs_original.png', dpi=300)
     return st
 
 # TODO de-uts-ify
