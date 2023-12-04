@@ -263,7 +263,7 @@ def create_recordingeventsinfobiosemi(edfpath, audiostimulustablepath, audiowavp
     bitsnd -= bitsnd.min()
     bitsnd[bitsnd==bitsnd.max()] = 1
     bitsnd_fs = metadata['fs']
-    pbs_fs, playbacksnd = wavfile.read(filename=str(audiowavpath))
+    playbacksnd, pbs_fs = soundfile.read(audiowavpath)
     if reverse_polarity:
         playbacksnd = -playbacksnd
     st, params, (fig1, fig2, fig3) = create_recordingeventtable(recsnd=bitsnd,

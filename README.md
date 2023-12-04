@@ -36,6 +36,9 @@ LICENSE file.
 
 Release Notes
 -------------
+*version 0.2.6*
+- use soundfile for reading wav file (scipy did not work well over samba in Linux)
+
 *version 0.2.5*
 - separated eeglib from info repo for easier use.
 
