@@ -25,7 +25,7 @@ setuptools.setup(
     description='eeglib enables you find auditory events in eeg recordings '
                 'based on calibration sounds',
     python_requires='>=3.6',
-    install_requires=['darr','matplotlib','pandas','pyedflib'],
+    install_requires=['darr','matplotlib','pandas','pyedflib', 'soundfile'],
     data_files = [("", ["LICENSE"])],
     classifiers=[
         "Programming Language :: Python :: 3",

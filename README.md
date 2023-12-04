@@ -20,11 +20,12 @@ Requirements
 ------------
 Eeglib depends on the following Python libraries:
 
+* darr
+* matplotlib
 * numpy
 * pyedflib
 * pandas
-* matplotlib
-* darr
+* soundfile
 
 However, these are installed automatically if you use the 'pip' method to install eeglib above.
 
