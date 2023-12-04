@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from scipy.io import wavfile
+import soundfile
 from scipy.signal import resample
 from darr import DataDir, create_datadir
 from pathlib import Path
@@ -337,7 +337,7 @@ def create_recordingeventsinfoopenbci(datafilepath, audiostimulustablepath,
         outputpath = Path(outputpath)
     pst = pd.read_csv(audiostimulustablepath)
 
-    fs, data = wavfile.read(filename=str(audiowavpath))
+    data, fs = soundfile.read(audiowavpath)
     playbacksnd = uts.UniformTimeSeries(samples=data, fs=float(fs))
     st, params, (fig1, fig2) = create_recordingeventtable(recsnd=bitsnd,
                                                           audiostimulustable=pst,
