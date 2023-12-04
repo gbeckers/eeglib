@@ -36,4 +36,9 @@ def stimulustabletoevents(st, stimcolumn, fs, event_id=None):
     eventtable = st[['startframe']].copy()
     eventtable['val'] = 0
     eventtable['events'] = st.apply(lambda x: eventdict[x[stimcolumn]], axis=1)
+    # only return dict items if they occur in table
+    events = eventtable['events'].unique()
+    for eventlabel, event in eventdict.items():
+        if event not in events:
+            eventdict.pop(eventlabel)
     return eventdict, eventtable.values
