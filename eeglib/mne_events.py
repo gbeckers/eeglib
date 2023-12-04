@@ -42,4 +42,4 @@ def stimulustabletoevents(st, stimcolumn, fs, event_id=None):
     for eventlabel, event in eventdict.items():
         if event in events:
             finaleventdict[eventlabel] = event
-    return eventdict, eventtable.values
+    return finaleventdict, eventtable.values
