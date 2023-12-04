@@ -95,7 +95,9 @@ def convert_stimulustable(audiostimulustable, starttimefirst, starttimelast, new
 
 # TODO refactor code to make it more readable
 def create_recordingeventtable(recsnd, recsnd_fs, playbacksnd, playbacksnd_fs,
-                               audiostimulustable, recordedasbit=False,
+                               audiostimulustable,
+                               startbegincalib=None, startendcalib=None,
+                               recordedasbit=False,
                                searchduration=30., bitthreshold=0.005,
                                checkcalibmarks=False, correct_ones=None,
                                append_zeros=None):
@@ -108,6 +110,8 @@ def create_recordingeventtable(recsnd, recsnd_fs, playbacksnd, playbacksnd_fs,
     playbacksnd
     playbacksnd_fs
     audiostimulustable
+    startbegincalib
+    startendcalib
     recordedasbit
     searchduration
     bitthreshold
@@ -129,11 +133,14 @@ def create_recordingeventtable(recsnd, recsnd_fs, playbacksnd, playbacksnd_fs,
     # t1, t2 are the start times of the calibmarks
     if append_zeros is not None:
         recsnd = np.concatenate([recsnd, np.zeros(append_zeros, dtype=recsnd.dtype)])
-    t1,t2 = find_calibmarks(snd=recsnd, snd_fs=recsnd_fs, calibmark=calibmark,
-                            calibmark_fs=playbacksnd_fs,
-                            searchduration=searchduration,
-                            recordedasbit=recordedasbit,
-                            bitthreshold=bitthreshold, correct_ones=correct_ones)
+    if (startbegincalib is None) or (startendcalib is None):
+        t1,t2 = find_calibmarks(snd=recsnd, snd_fs=recsnd_fs, calibmark=calibmark,
+                                calibmark_fs=playbacksnd_fs,
+                                searchduration=searchduration,
+                                recordedasbit=recordedasbit,
+                                bitthreshold=bitthreshold, correct_ones=correct_ones)
+    else:
+        t1,t2 = startbegincalib, startendcalib
     # calc scaling factor because of deviation sample rates playback and recoring device clocks
     factor = (t2 - t1) / (st.iloc[-1]['starttime'] - st.iloc[0]['starttime'])
     # calc offset because recording did not start at start of playback stimuli
@@ -222,7 +229,8 @@ def create_recordingeventtable(recsnd, recsnd_fs, playbacksnd, playbacksnd_fs,
     return st, params, (fig1, fig2, fig3)
 
 
-def create_recordingeventsinfobiosemi(edfpath, audiostimulustablepath, audiowavpath, outputpath=None,
+def create_recordingeventsinfobiosemi(edfpath, audiostimulustablepath, audiowavpath,
+                                      startbegincalib=None, startendcalib=None, outputpath=None,
                                       searchduration=30., bitthreshold=0.005, reverse_polarity=False,
                                       append_zeros=None):
     """Creates information on sound stimulus occurrence in recordingdata.
@@ -271,6 +279,8 @@ def create_recordingeventsinfobiosemi(edfpath, audiostimulustablepath, audiowavp
                                                                 playbacksnd=playbacksnd,
                                                                 playbacksnd_fs=pbs_fs,
                                                                 audiostimulustable=pst,
+                                                                startbegincalib=startbegincalib,
+                                                                startendcalib=startendcalib,
                                                                 recordedasbit=recordedasbit,
                                                                 searchduration=searchduration,
                                                                 bitthreshold=bitthreshold,
