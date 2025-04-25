@@ -175,6 +175,7 @@ def create_recordingeventtable(recsnd, recsnd_fs, playbacksnd, playbacksnd_fs,
         plt.subplot(4, 1, 1)
         c1samplingtimes = st.iloc[0]['starttime'] - margin/recsnd_fs + np.arange(len(calibm1), dtype='float64') / recsnd_fs
         plt.plot(c1samplingtimes, calibm1)
+        plt.plot(st.iloc[0]['starttime'] + np.arange(len(calibm1)) / recsnd_fs, playbacksnd[:len(calibm1)])
         plt.title("Calibmarks")
         plt.subplot(4, 1, 2)
         c1selsamplingtimes = st.iloc[0]['starttime'] - detailmargin/recsnd_fs + np.arange(len(calibm1sel), dtype='float64') / recsnd_fs
