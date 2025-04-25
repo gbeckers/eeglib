@@ -141,6 +141,11 @@ def create_recordingeventtable(recsnd, recsnd_fs, playbacksnd, playbacksnd_fs,
                                 bitthreshold=bitthreshold, correct_ones=correct_ones)
     else:
         t1,t2 = startbegincalib, startendcalib
+    if startbegincalib is not None:
+        t1 = startbegincalib
+    if startendcalib is not None:
+        t2 = startendcalib
+
     # calc scaling factor because of deviation sample rates playback and recoring device clocks
     factor = (t2 - t1) / (st.iloc[-1]['starttime'] - st.iloc[0]['starttime'])
     # calc offset because recording did not start at start of playback stimuli
@@ -237,6 +242,9 @@ def create_recordingeventsinfobiosemi(edfpath, audiostimulustablepath, audiowavp
 
     The information is generated based on a trace of the audio playback, a provided stimulus table
     and an playback audio file. The information is saved in several files in `outputpath`.
+
+    If both startbegincalib and startendcalib is None, it will attempt to find calibmarks based on cross
+    correlation.
 
     Parameters
     ----------
