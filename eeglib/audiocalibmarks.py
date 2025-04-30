@@ -97,6 +97,7 @@ def convert_stimulustable(audiostimulustable, starttimefirst, starttimelast, new
 def create_recordingeventtable(recsnd, recsnd_fs, playbacksnd, playbacksnd_fs,
                                audiostimulustable,
                                startbegincalib=None, startendcalib=None,
+                               scalingfactor=None,
                                recordedasbit=False,
                                searchduration=30., bitthreshold=0.005,
                                checkcalibmarks=False, correct_ones=None,
@@ -147,7 +148,10 @@ def create_recordingeventtable(recsnd, recsnd_fs, playbacksnd, playbacksnd_fs,
         t2 = startendcalib
 
     # calc scaling factor because of deviation sample rates playback and recoring device clocks
-    factor = (t2 - t1) / (st.iloc[-1]['starttime'] - st.iloc[0]['starttime'])
+    if scalingfactor is None:
+        factor = (t2 - t1) / (st.iloc[-1]['starttime'] - st.iloc[0]['starttime'])
+    else:
+        factor = scalingfactor
     # calc offset because recording did not start at start of playback stimuli
     offset = t1
     st['starttime'] = offset + factor * st['starttime']
@@ -236,7 +240,7 @@ def create_recordingeventtable(recsnd, recsnd_fs, playbacksnd, playbacksnd_fs,
 
 
 def create_recordingeventsinfobiosemi(edfpath, audiostimulustablepath, audiowavpath,
-                                      startbegincalib=None, startendcalib=None, outputpath=None,
+                                      startbegincalib=None, startendcalib=None, scalingfactor=None,outputpath=None,
                                       searchduration=30., bitthreshold=0.005, reverse_polarity=False,
                                       append_zeros=None):
     """Creates information on sound stimulus occurrence in recordingdata.
@@ -290,6 +294,7 @@ def create_recordingeventsinfobiosemi(edfpath, audiostimulustablepath, audiowavp
                                                                 audiostimulustable=pst,
                                                                 startbegincalib=startbegincalib,
                                                                 startendcalib=startendcalib,
+                                                                scalingfactor=scalingfactor,
                                                                 recordedasbit=recordedasbit,
                                                                 searchduration=searchduration,
                                                                 bitthreshold=bitthreshold,
