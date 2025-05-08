@@ -1,5 +1,9 @@
 import numpy as np
-import pyedflib
+
+try:
+    import pyedflib
+except Exception as e:
+    print("pyedflib not installed. Functiond that depend on it will not work.")
 
 # TODO unfortunately we need to switch to EDFlib-Python: https://gitlab.com/Teuniz/EDFlib-Python/-/tree/master
 # other edf readers do not read header info well, which is a huge problem because of patient name
